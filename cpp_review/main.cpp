@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Car.h"
+#include <memory>
 
 static int multiply(int& firstNumber, int& secondNumber) {
 	return firstNumber * secondNumber;
@@ -7,19 +9,6 @@ static int multiply(int& firstNumber, int& secondNumber) {
 static void printNumber(int& number) {
 	std::cout << number;
 }
-
-class Car {
-private:
-	static int carCounter;
-
-public:
-	Car() {
-		std::cout << "Car " << carCounter << " created." << '\n';
-		carCounter++;
-	}
-};
-
-int Car::carCounter = 0;
 
 int main() {
 	int firstValue = 10;
@@ -50,9 +39,34 @@ int main() {
 
 	std::cout << "rA = " << rA << '\n';
 
-	for (int i = 0; i < 10; i++) {
-		Car car;
+	{
+		for (int i = 0; i < 3; i++) {
+			Car car1;
+			car1.displayCarID();
+		}
 	}
+
+	{
+		Car car;
+
+		car.setFacingDirection(Car::Direction::LEFT);
+		car.displayFacingDirection();
+	}
+
+	{
+		Car* car = new Car;
+		car->displayCarID();
+		delete car;
+	}
+
+	{
+		std::unique_ptr<Car> uniqueCar = std::make_unique<Car>();
+		uniqueCar->setFacingDirection(Car::Direction::DOWN);
+		uniqueCar->displayFacingDirection();
+	}
+
+	std::cout << "meow" << '\n';
+
 
 	return EXIT_SUCCESS;
 }
