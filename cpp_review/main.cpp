@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Car.h"
 #include <memory>
+#include "Vector2.h"
 
 static int multiply(int& firstNumber, int& secondNumber) {
 	return firstNumber * secondNumber;
@@ -10,7 +11,7 @@ static void printNumber(int& number) {
 	std::cout << number;
 }
 
-int main() {
+static void prac1() {
 	int firstValue = 10;
 	int secondValue = 5;
 	int* pointerToFirst = &firstValue;
@@ -66,7 +67,23 @@ int main() {
 	}
 
 	std::cout << "meow" << '\n';
+}
 
+static void prac2() {
+	Vector2 vector1(1, 1);
+	Vector2 vector2(1, 1);
+
+	Vector2 vector3 = vector1 + vector2;
+
+	vector3.display();
+
+	Vector2 vector4 = vector3 * vector3;
+
+	vector4.display();
+}
+
+int main() {
+	prac2();
 
 	return EXIT_SUCCESS;
 }
